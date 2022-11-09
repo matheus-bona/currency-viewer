@@ -1,0 +1,85 @@
+{% load static %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Currency Viewer</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+
+<body>
+    <h1 class="text-center">
+        Currency Viewer
+    </h1>
+
+    <div class="main-content center container">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="p-5">
+
+
+        <form action="{% url 'rates:form_data' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="start">Start date:</label>
+
+                <input type="date" class="form-control" id="start" name="start" value="2022-11-04" min="2009-01-01">
+            </div>
+
+            <div class="form-group">
+                <label for="end">End date:</label>
+
+                <input type="date" class="form-control" id="end" name="end" value="2022-11-04" min="2009-01-01">
+            </div>
+
+            <div class="form-group">
+                <label for="currency">Choose a Currency:</label>
+                <select name="currency" class="form-control" id="currency">
+                    <option value="EUR">EUR</option>
+                    <option value="BRL">BRL</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-control">Send</button>
+        </form>
+
+
+    </div>
+
+
+
+    {% if data %}
+    <div id="container" class="d-flex align-items-center justify-content-center"></div>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script>
+        Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Currency Rate ({{currency}} based on USD)'
+            },
+            xAxis: {
+                categories: JSON.parse('{{dates|safe}}')
+            },
+            yAxis: {
+                title: {
+                    text: '{{currency}}'
+                }
+            },
+            series: JSON.parse('{{data|safe}}')
+        });
+    </script>
+    {% endif %}
+
+</body>
+
+</html>
