@@ -1,7 +1,7 @@
 
 # Currency Viewer
 
-This application graphs a series of exchange rate of the BRL, EUR and JPY currencies based on dollar and stores it in a database for future requests.
+This application graphs a series of exchange rate of the BRL, EUR and JPY currencies based on dollar and stores them in a database for future requests.
 
 Everything is developed on Django and it uses a highcharts graph to visualize the rates.
 
@@ -12,11 +12,11 @@ https://www.vatcomply.com/documentation
 
 When a date range is requested to API, the currency rates are stored in the database.
 
-You can check a preview the image below:
+The image below shows a preview:
 
 ![Alt text](preview_site.png)
 
-Attention: You can only request a range of 5 business day!
+Attention: You can only request a range of 5 business days!
 
 This application has 100% tests coverage.
 
