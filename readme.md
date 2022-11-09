@@ -22,7 +22,7 @@ This application has 100% tests coverage.
 
 ![Alt text](100coverage.png)
 
-It also has an API endpoint to show all dates and rates stored in db, callable by:
+It also has an API endpoint to show all dates and rates stored in db, callable with GET by:
 ```
  /api/v1/
 ```
